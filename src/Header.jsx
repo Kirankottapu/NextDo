@@ -2,7 +2,7 @@ function Header({ darkMode, toggleDarkMode }) {
   return (
     <header
       className={`py-3 px-4 sm:py-4 sm:px-6 shadow-md transition-all duration-300 ${
-        darkMode ? "bg-gray-800 text-white" : "bg-gray-300 text-gray-800"
+        darkMode ? "bg-gray-300 text-white" : "bg-gray-300 text-gray-800"
       }`}
     >
       <div className="flex flex-wrap justify-between items-center gap-2">
