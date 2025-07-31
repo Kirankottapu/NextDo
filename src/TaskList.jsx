@@ -1,92 +1,60 @@
-import { useState, useEffect } from "react";
-
-function TaskForm({ onAdd, taskToEdit, darkMode }) {
-  const [title, setTitle] = useState("");
-  const [dueDate, setDueDate] = useState("");
-
-  useEffect(() => {
-    if (taskToEdit) {
-      setTitle(taskToEdit.title || "");
-      setDueDate(taskToEdit.dueDate || "");
-    } else {
-      setTitle("");
-      setDueDate("");
-    }
-  }, [taskToEdit]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const trimmedTitle = title.trim();
-    if (!trimmedTitle) return;
-
-    const newTask = {
-      id: taskToEdit ? taskToEdit.id : Date.now(),
-      title: trimmedTitle,
-      dueDate,
-      completed: taskToEdit ? taskToEdit.completed : false,
-    };
-
-    onAdd(newTask);
-    setTitle("");
-    setDueDate("");
-  };
-
+const TaskList = ({ tasks, onEdit, onDelete, onToggle }) => {
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`space-y-4 p-6 sm:p-8 border rounded-2xl shadow-2xl transition-all duration-300 ${
-        darkMode
-          ? "bg-gray-900 text-white border-gray-700"
-          : "bg-white text-gray-800 border-gray-200"
-      }`}
-    >
-      <h2 className="text-xl font-semibold text-center">
-        {taskToEdit ? "Edit Task" : "Add a New Task"}
-      </h2>
+    <div className="space-y-6 mt-6">
+      {tasks.length === 0 ? (
+        <p className="text-gray-600 dark:text-gray-400 text-center">No tasks yet. Add one!</p>
+      ) : (
+        tasks.map((task) => (
+          <div
+            key={task.id}
+            className={`p-4 rounded-xl shadow-md flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 transition-all duration-300 ${
+              task.completed
+                ? "bg-green-100 dark:bg-green-900"
+                : "bg-yellow-100 dark:bg-yellow-900"
+            }`}
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 py-6">
+                {task.title}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Due: {task.dueDate || "Not set"}
+              </p>
+            </div>
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="title" className="text-sm font-medium">
-          Task Title
-        </label>
-        <input
-          id="title"
-          type="text"
-          value={title}
-          placeholder="Enter your task"
-          onChange={(e) => setTitle(e.target.value)}
-          className={`w-full px-4 py-2 text-sm rounded-lg border outline-none focus:ring-2 focus:ring-blue-500 ${
-            darkMode
-              ? "bg-gray-800 text-white border-gray-600"
-              : "bg-gray-100 border-gray-300"
-          }`}
-        />
-      </div>
+            <div className="flex gap-4 flex-wrap justify-end ">
+              <button
+                onClick={() => onToggle(task.id)}
+                className={`text-sm px-3 py-1 font-medium rounded-lg transition ${
+                  task.completed
+                    ? "bg-gray-600 hover:bg-gray-700 text-white"
+                    : "bg-purple-600 hover:bg-purple-700 text-white"
+                }`}
+              >
+                {task.completed ? "Undo" : "Mark Done"}
+              </button>
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="dueDate" className="text-sm font-medium">
-          Due Date
-        </label>
-        <input
-          id="dueDate"
-          type="date"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-          className={`w-full px-4 py-2 text-sm rounded-lg border outline-none focus:ring-2 focus:ring-blue-500 ${
-            darkMode
-              ? "bg-gray-800 text-white border-gray-600"
-              : "bg-gray-100 border-gray-300"
-          }`}
-        />
-      </div>
+              <button
+                onClick={() => onEdit(task)}
+                className="text-sm px-3 py-1 font-medium rounded-lg bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                ✏️ Edit
+              </button>
 
-      <button
-        type="submit"
-        className="w-full mt-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-all"
-      >
-        {taskToEdit ? "Update Task" : "Add Task"}
-      </button>
-    </form>
+              <button
+                onClick={() => onDelete(task.id)}
+                className="text-sm px-3 py-1 font-medium rounded-lg bg-red-600 hover:bg-red-700 text-white"
+              >
+                🗑️ Delete
+              </button>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
   );
-}
+};
 
-export default TaskForm;
+export default TaskList;
+
+
