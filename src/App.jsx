@@ -55,6 +55,7 @@ function App() {
       <Header darkMode={darkMode} toggleDarkMode={() => setDarkMode(!darkMode)} />
 
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6">
+        
         <TaskForm onAdd={handleAddOrUpdate} taskToEdit={taskToEdit} darkMode={darkMode}/>
 
         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4">
