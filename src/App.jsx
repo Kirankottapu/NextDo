@@ -58,7 +58,7 @@ function App() {
         
         <TaskForm onAdd={handleAddOrUpdate} taskToEdit={taskToEdit} darkMode={darkMode}/>
 
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 mt-4">
           <button
             onClick={() => setFilter("all")}
             className={`px-4 py-2 rounded text-sm sm:text-base transition ${
