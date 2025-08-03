@@ -1,10 +1,10 @@
 function Header({ darkMode, toggleDarkMode }) {
   return (
     <header
-      className={`py-3 px-4 sm:py-4 sm:px-6 shadow-md transition-all duration-300 ${
-        darkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
-      }`}
-    >
+  className={`py-6 px-4 sm:py-6 sm:px-6 lg:py-6 lg:px-6 shadow-md transition-all duration-300 ${
+    darkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
+  }`}
+>
       <div className="flex flex-wrap justify-between items-center gap-2">
         <h1 className="text-xl sm:text-2xl font-bold transition-colors duration-300">
           TaskMaster Pro
