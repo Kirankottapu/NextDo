@@ -1,9 +1,5 @@
 {
   "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://progresso.vercel.app/$1",
-      "permanent": true
-    }
+    { "source": "/(.*)", "destination": "https://nextdo.vercel.app", "permanent": true }
   ]
 }
