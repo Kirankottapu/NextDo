@@ -7,7 +7,7 @@ function Header({ darkMode, toggleDarkMode }) {
 >
       <div className="flex flex-wrap justify-between items-center gap-2">
         <h1 className="text-xl sm:text-2xl font-bold transition-colors duration-300">
-          TaskMaster Pro
+          Progresso
         </h1>
         <button
           onClick={toggleDarkMode}
